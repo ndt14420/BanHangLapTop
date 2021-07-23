@@ -1,0 +1,65 @@
+﻿@using HutechAndYou.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<ChiTietDDH>
+
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+<div class="carousel-inner">
+    <div class="item active">
+        <img src="~/Content/images/banner3.png" style="width:100%; height: 150px" alt="First slide">
+        <div class="carousel-caption">
+            <h1>GIỎ HÀNG CỦA BẠN</h1>
+        </div>
+    </div>
+</div>
+
+<section class="about-block">
+    <div class="container">
+        <div class="row">
+            <div class="list-group-item">
+                <table class="table center-aligned-table">
+                    <thead>
+                        <tr>
+                            <th style="line-height:18px;" class="border-bottom-0">Tên Sản phẩm</th>
+                            <th style="line-height:18px;" class="border-bottom-0">Số lượng</th>
+                            <th style="line-height:18px;" class="border-bottom-0">Đơn giá</th>
+                            <th style="line-height:18px;" class="border-bottom-0">Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ChiTietDDH in Model)
+                        {
+                            <tr>
+                                <td style="line-height:18px;">@ChiTietDDH.SanPham.TenSP</td>
+                                <td style="line-height:18px;">@ChiTietDDH.Soluong</td>
+                                <td style="line-height:18px;">@string.Format("{0:0,0}", ChiTietDDH.Dongia) VNĐ</td>
+                                <td style="line-height:18px;"><a href="@Url.Action("QuanLyDonHang","GioHang")">Trở về</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="clearfix"></div>
+                <table class="table center-aligned-table">
+                    <thead>
+                        <tr>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <td style=" padding: 10px; float: left; font-size: 20px;">
+                                @Html.PagedListPager(Model, page => Url.Action("ChiTietDonHang", new { page = page }))
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
